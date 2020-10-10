@@ -3,22 +3,46 @@
 
 
 
-
-
-
-<h2>Add a Cat</h2>
-<form class="create-form">
-
+<h2>Add a Burger to be DEVOURED!</h2>
+<form class="create-update-form" action="/", method="POST">
   <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
+    <label for="burg">Added Burger</label>
+    <input type="text" id="burg" name="burger_name">
+    <button type="submit">Add Burger</button>
   </div>
-
-  <div class="form-group">
-    <label for="slee">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
-  </div>
-
-  <button type="submit">Add Cat</button>
 </form>
+
+
+
+<h2>Choose a Burger to DEVOUR!!</h2>
+<ul>
+	{{#each burgers}}
+		{{#unless this.devoured}}
+			  <li>
+			  {{this.id}}
+			  {{this.burger_name}}
+ <form action="/{{this.id}}?_method=PUT" method="POST">
+    <label for="devoured"></label>  
+    <input type="hidden" name="devoured" value="true">
+    <button type="submit">Devour Burger</button>
+  </div>
+</form>
+        </li>
+	{{/unless}}
+		{{/each}}
+</ul>
+
+
+
+<H2>Devoured Burgers!</H2>
+
+{{#each burgers}}
+  {{#if this.devoured}}
+  <li>
+    {{this.id}}
+    {{this.burger_name}}
+  </li>
+  {{/if}}
+{{/each}}
+
+

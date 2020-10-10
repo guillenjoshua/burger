@@ -14,25 +14,22 @@ function printQuestionMarks(num) {
   function objToSql(ob) {
     var arr = [];
   
-    
     for (var key in ob) {
       var value = ob[key];
   
       if (Object.hasOwnProperty.call(ob, key)) {
       
         
-       
         arr.push(key + "=" + value);
       }
     }
-  
-  
+    
     return arr.toString();
   }
   
 
   var orm = {
-    SelectAll: function(tableInput, cb) {
+    all: function(tableInput, cb) {
       var queryString = "SELECT * FROM " + tableInput + ";";
       connection.query(queryString, function(err, result) {
         if (err) {
@@ -41,7 +38,7 @@ function printQuestionMarks(num) {
         cb(result);
       });
     },
-    insertOne: function(table, cols, vals, cb) {
+    create: function(table, cols, vals, cb) {
       var queryString = "INSERT INTO " + table;
   
       queryString += " (";
@@ -62,7 +59,7 @@ function printQuestionMarks(num) {
       });
     },
     
-    updateOne: function(table, objColVals, condition, cb) {
+    update: function(table, objColVals, condition, cb) {
       var queryString = "UPDATE " + table;
   
       queryString += " SET ";
