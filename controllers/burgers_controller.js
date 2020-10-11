@@ -28,13 +28,13 @@ router.get("/", function(req, res) {
     });
   });
   
-  router.put("/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
+  router.post("/update", function(req, res) {
+    var condition = "id = " + req.body.id;
   
     console.log("condition", condition);
   
     burger.update({
-      devoured: req.body.devoured 
+      devoured: req.body.devoured
     }, condition, function() {
     
         res.redirect('/');
